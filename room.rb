@@ -19,10 +19,12 @@ class Room
     if @guests.length >= @max_capacity
       return "The room is currently at max capacity."
     else
-      if guest.can_afford_entry_fee == true
-      @guests << guest
-      guest.pay_entry_fee(self)
-    end
+      if guest.money >= @entry_fee
+        @guests << guest
+        guest.pay_entry_fee(self)
+      else
+        return "#{guest.name} doesn't have enough money to enter!"
+      end
     end
   end
 

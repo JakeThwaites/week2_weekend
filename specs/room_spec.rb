@@ -15,6 +15,7 @@ class RoomTest < MiniTest::Test
     @guest1 = Guest.new("Jake", 50)
 
     @room1 = Room.new("Rock", 1, 10)
+    @room2 = Room.new("Jazz", 1, 60)
   end
 
   def test_room_has_name
@@ -64,6 +65,12 @@ class RoomTest < MiniTest::Test
     @room1.check_in_guest(@guest1)
     expected = "The room is currently at max capacity."
     actual = @room1.check_in_guest(@guest2)
+    assert_equal(expected, actual)
+  end
+
+  def test_check_guest_into_room__not_enough_money
+    expected = "Jake doesn't have enough money to enter!"
+    actual = @room2.check_in_guest(@guest1)
     assert_equal(expected, actual)
   end
 

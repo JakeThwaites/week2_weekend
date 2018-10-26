@@ -16,12 +16,4 @@ class Guest
     end
   end
 
-  def can_afford_entry_fee(room)
-    if @money >= room.entry_fee
-      return true
-    else
-      return false
-    end
-  end
-
 end

@@ -25,18 +25,6 @@ class GuestTest < MiniTest::Test
     assert_equal(expected, actual)
   end
 
-  def test_guest_can_afford_entry_fee
-    expected = true
-    actual = @guest1.can_afford_entry_fee(@room1)
-    assert_equal(expected, actual)
-  end
-
-  def test_guest_can_afford_entry_fee__false
-    expected = false
-    actual = @guest1.can_afford_entry_fee(@room2)
-    assert_equal(expected, actual)
-  end
-
   def test_guest__pay_entry_fee__has_enough_money
     expected = "Jake's balance is now £40."
     actual = @guest1.pay_entry_fee(@room1)
