@@ -8,11 +8,11 @@ require_relative('../guest')
 class RoomTest < MiniTest::Test
 
   def setup
-    @song1 = Song.new("Piano Man")
+    @song1 = Song.new("Uptown Girl")
     @song2 = Song.new("Song 2")
     songs = [@song1, @song2]
 
-    @guest1 = Guest.new("Jake", 50)
+    @guest1 = Guest.new("Jake", 50, "Uptown Girl")
 
     @room1 = Room.new("Rock", 1, 10)
     @room2 = Room.new("Jazz", 1, 60)
@@ -42,6 +42,12 @@ class RoomTest < MiniTest::Test
     assert_equal(expected, actual)
   end
 
+  def check_room_has_total_income
+    expected = 0
+    actual = @room1.total_income
+    assert_equal(expected, actual)
+  end
+
 
   # def test_play_song
   #   expected = "I'M PLAYING MUSIC!!"
@@ -50,7 +56,7 @@ class RoomTest < MiniTest::Test
   # end
 
   def test_song_added_to_room
-    expected = "Piano Man added to room!"
+    expected = "Uptown Girl added to room!"
     actual = @room1.add_song_to_room(@song1)
     assert_equal(expected, actual)
   end
@@ -81,6 +87,22 @@ class RoomTest < MiniTest::Test
     assert_equal(expected, actual)
   end
 
+  def test_start_the_music
+    @room1.add_song_to_room(@song1)
 
+    expected = "I'M PLAYING MUSIC!!"
+    actual = @room1.start_the_music
+    assert_equal(expected, actual)
+  end
+
+  # def test_start_the_music__favourite_song
+  #   @room1.add_song_to_room(@song1)
+  #   @room1.check_in_guest(@guest1)
+  #
+  #   expected = "UPTOWN GIRL!! That's Jake's favourite song!"
+  #   actual = @room1.start_the_music
+  #   assert_equal(expected, actual)
+  #
+  # end
 
 end

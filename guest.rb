@@ -1,10 +1,11 @@
 class Guest
 
-  attr_reader :name, :money
+  attr_reader :name, :money, :favourite_song
 
-  def initialize(name, money)
+  def initialize(name, money, favourite_song)
     @name = name
     @money = money
+    @favourite_song = favourite_song
   end
 
   def pay_entry_fee(room)
@@ -15,5 +16,10 @@ class Guest
       return "#{name} doesn't have enough money to go in the #{room.name} room!"
     end
   end
+
+  def cheer_at_song
+      p "Whoo! This is my jam!"
+  end
+
 
 end

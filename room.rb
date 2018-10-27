@@ -1,13 +1,15 @@
 class Room
 
-  attr_reader :name, :max_capacity, :songs_in_room, :guests, :entry_fee
+  attr_reader :name, :max_capacity, :songs_in_room, :guests, :entry_fee, :song_playing
 
   def initialize(name, max_capacity, entry_fee)
     @name = name
     @max_capacity = max_capacity
     @songs_in_room = []
+    @song_playing = @songs_in_room.sample
     @guests = []
     @entry_fee = entry_fee
+    # @total_income = 0
   end
 
   def add_song_to_room(song)
@@ -32,4 +34,12 @@ class Room
     @guests.delete(guest)
     return "current guests are: #{@guests}"
   end
+
+  def start_the_music
+
+    @song_playing = @songs_in_room.sample
+     @song_playing.play
+  end
+
+
 end
