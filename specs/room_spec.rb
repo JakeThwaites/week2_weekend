@@ -49,12 +49,6 @@ class RoomTest < MiniTest::Test
   end
 
 
-  # def test_play_song
-  #   expected = "I'M PLAYING MUSIC!!"
-  #   actual = @room1.play_song("Piano Man")
-  #   assert_equal(expected, actual)
-  # end
-
   def test_song_added_to_room
     expected = "Uptown Girl added to room!"
     actual = @room1.add_song_to_room(@song1)
@@ -67,8 +61,17 @@ class RoomTest < MiniTest::Test
     assert_equal(expected, actual)
   end
 
+  def test_check_guest_into_room__increases_total_income
+    @room1.check_in_guest(@guest1)
+
+    expected = 10
+    actual = @room1.total_income
+    assert_equal(expected, actual)
+  end
+
   def test_check_guest_into_room__max_capacity_exceeded
     @room1.check_in_guest(@guest1)
+
     expected = "The room is currently at max capacity."
     actual = @room1.check_in_guest(@guest2)
     assert_equal(expected, actual)
@@ -95,14 +98,23 @@ class RoomTest < MiniTest::Test
     assert_equal(expected, actual)
   end
 
-  # def test_start_the_music__favourite_song
-  #   @room1.add_song_to_room(@song1)
-  #   @room1.check_in_guest(@guest1)
-  #
-  #   expected = "UPTOWN GIRL!! That's Jake's favourite song!"
-  #   actual = @room1.start_the_music
-  #   assert_equal(expected, actual)
-  #
-  # end
+  def test_room_has_total_income
+    expected = 0
+    actual = @room1.total_income
+    assert_equal(expected, actual)
+  end
+
+  def test_room_has_a_bar
+    expected = [{drink: "beer", cost: 5}]
+    actual = @room1.drinks_available_from_bar
+    assert_equal(expected, actual)
+  end
+
+  def test_sell_a_drink
+    @room1.sell_a_drink("beer")
+    expected = 5
+    actual = @room1.total_income
+    assert_equal(expected, actual)
+  end
 
 end

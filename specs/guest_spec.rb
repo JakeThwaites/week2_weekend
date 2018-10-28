@@ -40,9 +40,11 @@ class GuestTest < MiniTest::Test
     assert_equal(expected, actual)
   end
 
-  def test_guest_pay_entry_fee__not_enough_money
-    expected = "Jake doesn't have enough money to go in the Jazz room!"
-    actual = @guest1.pay_entry_fee(@room2)
+  def test_guest_pay_entry_fee__joins_room
+    @guest1.pay_entry_fee(@room1)
+
+    expected = @room1
+    actual = @guest1.room
     assert_equal(expected, actual)
   end
 
@@ -51,4 +53,11 @@ class GuestTest < MiniTest::Test
     actual = @guest1.cheer_at_song
     assert_equal(expected, actual)
   end
+
+  def test_buy_a_drink
+    expected = "Jake's balance is now £45"
+    actual = @guest1.buy_a_drink(@room1.drinks_available_from_bar[0])
+    assert_equal(expected, actual)
+  end
+
 end

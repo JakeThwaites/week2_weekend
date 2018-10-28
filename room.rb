@@ -1,6 +1,6 @@
 class Room
 
-  attr_reader :name, :max_capacity, :songs_in_room, :guests, :entry_fee, :song_playing
+  attr_reader :name, :max_capacity, :songs_in_room, :guests, :entry_fee, :song_playing, :total_income, :drinks_available_from_bar
 
   def initialize(name, max_capacity, entry_fee)
     @name = name
@@ -9,7 +9,8 @@ class Room
     @song_playing = @songs_in_room.sample
     @guests = []
     @entry_fee = entry_fee
-    # @total_income = 0
+    @total_income = 0
+    @drinks_available_from_bar = [{drink: "beer", cost: 5}]
   end
 
   def add_song_to_room(song)
@@ -23,6 +24,7 @@ class Room
     else
       if guest.money >= @entry_fee
         @guests << guest
+        @total_income += entry_fee
         guest.pay_entry_fee(self)
       else
         return "#{guest.name} doesn't have enough money to enter!"
@@ -36,9 +38,16 @@ class Room
   end
 
   def start_the_music
-
     @song_playing = @songs_in_room.sample
-     @song_playing.play
+    @song_playing.play
+  end
+
+  def sell_a_drink(drink_name)
+    for drink in drinks_available_from_bar
+      if drink[:drink] == drink_name
+        @total_income += drink[:cost]
+      end
+    end
   end
 
 
