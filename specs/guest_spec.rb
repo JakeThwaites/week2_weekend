@@ -55,8 +55,19 @@ class GuestTest < MiniTest::Test
   end
 
   def test_buy_a_drink
-    expected = "Jake's balance is now £45"
+    @room1.check_in_guest(@guest1)
+
+    expected = "Jake's balance is now £35"
     actual = @guest1.buy_a_drink(@room1.drinks_available_from_bar[0])
+    assert_equal(expected, actual)
+  end
+
+  def test_buy_a_drink__room_money_increases
+    @room1.check_in_guest(@guest1)
+    @guest1.buy_a_drink(@room1.drinks_available_from_bar[0])
+    
+    expected = 15
+    actual = @room1.total_income
     assert_equal(expected, actual)
   end
 

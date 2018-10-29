@@ -22,7 +22,9 @@ class Guest
 
   def buy_a_drink(drink)
     cost_of_drink = drink[:cost]
+    
     @money -= cost_of_drink
+    @room.sell_a_drink(drink)
 
     return "Jake's balance is now £#{money}"
   end
